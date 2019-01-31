@@ -88,45 +88,45 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/next/dist/pages/_document.js":
-/*!***************************************************!*\
-  !*** ./node_modules/next/dist/pages/_document.js ***!
-  \***************************************************/
+/***/ "./node_modules/next/dist/pages/_error.js":
+/*!************************************************!*\
+  !*** ./node_modules/next/dist/pages/_error.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next/document */ "next/document")
+module.exports = __webpack_require__(/*! next/error */ "next/error")
 
 
 /***/ }),
 
-/***/ 2:
-/*!*********************************************************!*\
-  !*** multi ./node_modules/next/dist/pages/_document.js ***!
-  \*********************************************************/
+/***/ 1:
+/*!******************************************************!*\
+  !*** multi ./node_modules/next/dist/pages/_error.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/Hubert/Desktop/Codesmith/Unit 11/unit-11-project/node_modules/next/dist/pages/_document.js */"./node_modules/next/dist/pages/_document.js");
+module.exports = __webpack_require__(/*! /Users/Hubert/Desktop/Codesmith/Unit 11/unit-11-project/frontend/node_modules/next/dist/pages/_error.js */"./node_modules/next/dist/pages/_error.js");
 
 
 /***/ }),
 
-/***/ "next/document":
-/*!********************************!*\
-  !*** external "next/document" ***!
-  \********************************/
+/***/ "next/error":
+/*!*****************************!*\
+  !*** external "next/error" ***!
+  \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("next/document");
+module.exports = require("next/error");
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=_document.js.map
+//# sourceMappingURL=_error.js.map
