@@ -30,7 +30,7 @@ userController.createUser = async (req, res, db, bcrypt) => {
     db.transaction(trx => {
       trx
         .insert({
-          password,
+          password: hashedPassword,
           email
         })
         .into('login')
@@ -49,8 +49,9 @@ userController.createUser = async (req, res, db, bcrypt) => {
               res.json(user[0]);
             });
         })
-        .then(trx.commit);
-    }).catch(trx.rollback);
+        .then(trx.commit)
+        .catch(trx.rollback);
+    });
   } catch (err) {
     console.log(err);
   }
