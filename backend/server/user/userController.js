@@ -22,36 +22,35 @@ userController.getAllUsers = next => {
 userController.createUser = async (req, res, db, bcrypt) => {
   try {
     const { name, email, password, city, cohort } = req.body;
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    db('users')
-      .insert({
-        name,
-        email,
-        password: hashedPassword,
-        city,
-        cohort
-      })
-      .then(resp => {
-        if (resp) {
-          res.status(200).json('Success');
-        } else {
-          res.status(400).json('Failure');
-        }
-      });
-    //   .catch(err => res.status(400).json('Error creating user'));
-
-    //     .then(resp => {
-    //       sessionController.startSession(req, res, resp).then(resp => {
-    //         const { cookieId } = resp;
-
-    //         cookieController.setSSIDCookie(req, res, cookieId);
-    //         res.redirect('/secret');
-    //       });
-    //     })
-    //     .catch(err => {
-    //       res.render('./../client/signup.ejs');
-    //     });
+    if (!email || !name || !password) {
+      return res.status(400).json('Incorrect form submission');
+    }
+    const SALT_ROUNDS = 10;
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    db.transaction(trx => {
+      trx
+        .insert({
+          password,
+          email
+        })
+        .into('login')
+        .returning('email')
+        .then(loginEmail => {
+          return trx('users')
+            .returning('*')
+            .insert({
+              name,
+              email: loginEmail,
+              password: hashedPassword,
+              city,
+              cohort
+            })
+            .then(user => {
+              res.json(user[0]);
+            });
+        })
+        .then(trx.commit);
+    }).catch(trx.rollback);
   } catch (err) {
     console.log(err);
   }
