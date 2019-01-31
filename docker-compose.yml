@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  client:
+    container_name: next
+    build: ./client
+    command: npm run dev
+    ports:
+      - '7777:7777'
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+  express-backend:
+    container_name: unit-11
+    build: ./server
+    command: npm start
+    environment:
+      POSTGRES_USER: hubert
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: backend
+      POSTGRES_HOST: postgres
+      REDIS_URL: redis://redis:6379
+    links:
+      - postgres
+      - redis
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+
+  postgres:
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: hubert
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: backend
+      POSTGRES_HOST: postgres
+    build: ./server/postgres
+    ports:
+      - 5432
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - '6379:6379'
