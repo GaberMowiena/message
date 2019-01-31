@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  express-backend:
+    container_name: unit-11
+    build: ./
+    command: npm start
+    working_dir: /usr/src
+    environment:
+      POSTGRES_USER: hubert
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: backend
+      POSTGRES_HOST: postgres
+    links:
+      - postgres
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src
+
+  postgres:
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: hubert
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: backend
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - 5432
