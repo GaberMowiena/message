@@ -11,8 +11,10 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: backend
       POSTGRES_HOST: postgres
+      REDIS_URL: redis://redis:6379
     links:
       - postgres
+      - redis
     ports:
       - '3000:3000'
     volumes:
@@ -28,3 +30,8 @@ services:
     build: ./postgres
     ports:
       - 5432
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - '6379:6379'

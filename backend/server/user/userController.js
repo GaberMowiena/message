@@ -19,31 +19,41 @@ userController.getAllUsers = next => {
  * @param req - http.IncomingRequest
  * @param res - http.ServerResponse
  */
-userController.createUser = async (req, res, bcrypt) => {
+userController.createUser = async (req, res, db, bcrypt) => {
   try {
-    // write code here
-    const { username, password } = req.body;
-    // console.log('reqbody', req.body);
+    const { name, email, password, city, cohort } = req.body;
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    // console.log(hashedPassword);
-    User.create({
-      username: username,
-      password: hashedPassword
-    })
-      .then(resp => {
-        sessionController.startSession(req, res, resp).then(resp => {
-          const { cookieId } = resp;
-
-          cookieController.setSSIDCookie(req, res, cookieId);
-          res.redirect('/secret');
-        });
+    db('users')
+      .insert({
+        name,
+        email,
+        password: hashedPassword,
+        city,
+        cohort
       })
-      .catch(err => {
-        res.render('./../client/signup.ejs');
+      .then(resp => {
+        if (resp) {
+          res.status(200).json('Success');
+        } else {
+          res.status(400).json('Failure');
+        }
       });
+    //   .catch(err => res.status(400).json('Error creating user'));
+
+    //     .then(resp => {
+    //       sessionController.startSession(req, res, resp).then(resp => {
+    //         const { cookieId } = resp;
+
+    //         cookieController.setSSIDCookie(req, res, cookieId);
+    //         res.redirect('/secret');
+    //       });
+    //     })
+    //     .catch(err => {
+    //       res.render('./../client/signup.ejs');
+    //     });
   } catch (err) {
-    res.render('./../client/signup.ejs');
+    console.log(err);
   }
 };
 
