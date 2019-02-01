@@ -157,7 +157,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
     _this.state = {
-      users: []
+      users: [],
+      calendarData: []
     };
     return _this;
   }
@@ -168,23 +169,31 @@ function (_Component) {
       var _componentDidMount = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var data;
+        var users, calendarData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()('http://localhost:3000').then(function (users) {
-                  return users.json();
+                return isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()('http://localhost:3000').then(function (data) {
+                  return data.json();
                 });
 
               case 2:
-                data = _context.sent;
-                this.setState({
-                  users: data
+                users = _context.sent;
+                _context.next = 5;
+                return isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_3___default()('http://slack-server.elasticbeanstalk.com/calendar/NY/9').then(function (calendars) {
+                  return calendars.json();
                 });
 
-              case 4:
+              case 5:
+                calendarData = _context.sent;
+                this.setState({
+                  users: users,
+                  calendarData: calendarData
+                });
+
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -206,37 +215,37 @@ function (_Component) {
         return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 35
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 31
+            lineNumber: 36
           },
           __self: this
         }, user.name), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 32
+            lineNumber: 37
           },
           __self: this
         }, user.email), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 33
+            lineNumber: 38
           },
           __self: this
         }, user.password), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 34
+            lineNumber: 39
           },
           __self: this
         }, user.city), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 35
+            lineNumber: 40
           },
           __self: this
         }, user.cohort));
@@ -244,26 +253,26 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 45
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
         href: "/page2",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 41
+          lineNumber: 46
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 42
+          lineNumber: 47
         },
         __self: this
       }, "YO")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 50
         },
         __self: this
       }, userList));

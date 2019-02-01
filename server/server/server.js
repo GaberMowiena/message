@@ -31,19 +31,6 @@ app.use(cors());
  * in req.body
  */
 app.use(bodyParser.urlencoded({ extended: true }));
-// const whitelist = ['http://localhost:7777'];
-// const corsOptions = {
-//   origin: function(origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   }
-// };
-
-// app.use(morgan('combined'));
-// app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 /**
@@ -82,6 +69,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.post('/signup', (req, res) => {
+  // console.log(req.body);
   register.createUser(req, res, db, bcrypt);
 });
 

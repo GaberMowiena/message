@@ -13,15 +13,20 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      calendarData: []
     };
   }
 
   async componentDidMount() {
-    const data = await fetch('http://localhost:3000').then(users =>
-      users.json()
+    const users = await fetch('http://localhost:3000').then(data =>
+      data.json()
     );
-    this.setState({ users: data });
+    const calendarData = await fetch(
+      'http://slack-server.elasticbeanstalk.com/calendar/NY/9'
+    ).then(calendars => calendars.json());
+
+    this.setState({ users, calendarData });
   }
   render() {
     const { users } = this.state;

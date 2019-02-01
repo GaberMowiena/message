@@ -27,6 +27,7 @@ userController.createUser = async (req, res, db, bcrypt) => {
     }
     const SALT_ROUNDS = 10;
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    console.log('email', email);
     db.transaction(trx => {
       trx
         .insert({
@@ -40,7 +41,7 @@ userController.createUser = async (req, res, db, bcrypt) => {
             .returning('*')
             .insert({
               name,
-              email: loginEmail,
+              email: loginEmail[0],
               password: hashedPassword,
               city,
               cohort
