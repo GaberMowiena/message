@@ -1,7 +1,8 @@
-// Redis setup
+// npm packages
 const jwt = require('jsonwebtoken');
 const redis = require('redis');
 
+// global constants
 const redisClient = redis.createClient(process.env.REDIS_URL);
 
 const signToken = email => {
@@ -49,7 +50,7 @@ const handleSignin = (req, res, db, bcrypt) => {
   //6. else reject the promise
   return db
     .select('email', 'password')
-    .from('login')
+    .from('users')
     .where('email', '=', email)
     .then(data => {
       return bcrypt.compare(password, data[0].password).then(valid => {
@@ -81,10 +82,11 @@ const getAuthTokenId = (req, res) => {
 const signinAuthentication = (req, res, db, bcrypt) => {
   // console.log(req.body.email);
   //1. Get authorization from header
+
   const { authorization } = req.headers;
   //2. If authorization is true, return the result of getAuthTokenId(res,req)
   if (authorization) {
-    return getAuthTokenId(res, req);
+    return getAuthTokenId(req, res);
   } else {
     //3. Otherwise call handleSignin(req, res, db, bcrypt) and then check if the data returned has id and email
     return handleSignin(req, res, db, bcrypt)

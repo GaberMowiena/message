@@ -1,38 +1,30 @@
 {
-  "name": "unit-11-authentication",
+  "name": "peer-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/server.js",
-    "test": "export NODE_ENV=test && mocha ./test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodesmithLLC/unit-11-authentication.git"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CodesmithLLC/unit-11-authentication/issues"
-  },
-  "homepage": "https://github.com/CodesmithLLC/unit-11-authentication#readme",
   "dependencies": {
-    "bcryptjs": "^2.3.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "chai": "^3.5.0",
-    "cookie-parser": "^1.4.1",
     "cors": "^2.8.5",
-    "express": "^4.13.4",
-    "express-session": "^1.13.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jest": "^24.0.0",
+    "jsonschema": "^1.2.4",
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.16.3",
-    "mocha": "^2.4.5",
-    "mongoose": "^5.4.8",
-    "nodemon": "^1.8.1",
+    "nodemon": "^1.18.9",
+    "passport": "^0.4.0",
+    "passport-github2": "^0.1.11",
     "pg": "^7.8.0",
     "redis": "^2.8.0",
-    "sinon": "^1.17.3",
-    "supertest": "^1.1.0"
+    "sequelize": "^4.42.0",
+    "supertest": "^3.4.2"
   }
 }

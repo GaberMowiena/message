@@ -6,7 +6,7 @@ services:
     build: ./client
     command: npm run dev
     ports:
-      - '7777:7777'
+      - '7778:7778'
     volumes:
       - /app/node_modules
       - ./client:/app
@@ -17,7 +17,7 @@ services:
     command: npm start
     environment:
       POSTGRES_USER: hubert
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: 'hi'
       POSTGRES_DB: backend
       POSTGRES_HOST: postgres
       REDIS_URL: redis://redis:6379
@@ -34,7 +34,7 @@ services:
     container_name: my_postgres
     environment:
       POSTGRES_USER: hubert
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: 'hi'
       POSTGRES_DB: backend
       POSTGRES_HOST: postgres
     build: ./server/postgres

@@ -1,15 +1,33 @@
 import Link from 'next/link';
 import React, { Component } from 'react';
-import fetch from 'isomorphic-unfetch';
-// import axios from 'axios';
-//  fetch('localhost:3000');
+import Particles from 'react-particles-js';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { getUsers } from '../store/actions/usersActions';
+
+import NavStyles from '../components/Nav/styles/NavStyles';
+
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 100,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    }
+  }
+};
+
+const TitleWrapper = styled.span`
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1em;
+  background: none;
+  border: 0;
+`;
 
 class Home extends Component {
-  // static async getInitialProps() {
-  //   const res = await fetch('http://localhost:3000');
-  //   const images = await res.json();
-  //   return { images };
-  // }
   constructor(props) {
     super(props);
     this.state = {
@@ -17,46 +35,53 @@ class Home extends Component {
       calendarData: []
     };
   }
+  static async getInitialProps({ store }) {
+    const { users } = await store.dispatch(getUsers());
+    return { users };
+  }
 
-  async componentDidMount() {
-    const users = await fetch('http://localhost:3000').then(data =>
-      data.json()
-    );
-    const calendarData = await fetch(
-      'http://slack-server.elasticbeanstalk.com/calendar/NY/9'
-    ).then(calendars => calendars.json());
+  componentDidMount() {
+    const token = window.sessionStorage.getItem('token');
+    if (token) {
+      fetch('http://localhost:3000/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token
+        }
+      })
+        .then(data => data.json())
+        .then(user => console.log(user));
+    }
+    // const users = await fetch('http://localhost:3000').then(data =>
+    //   data.json()
+    // );
+    // const calendarData = await fetch(
+    //   'http://slack-server.elasticbeanstalk.com/calendar/NY/9'
+    // ).then(calendars => calendars.json());
 
-    this.setState({ users, calendarData });
+    // this.setState({ users, calendarData });
   }
   render() {
-    const { users } = this.state;
-    const userList = users.map(user => {
-      return (
-        <div>
-          <div>{user.name}</div>
-          <div>{user.email}</div>
-          <div>{user.password}</div>
-          <div>{user.city}</div>
-          <div>{user.cohort}</div>
-        </div>
-      );
-    });
     return (
       <div>
-        <Link href="/page2">
-          <a>YO</a>
-        </Link>
-
-        <div>{userList}</div>
+        <Particles params={particlesOptions} />
+        <TitleWrapper>Peer Me</TitleWrapper>
+        <NavStyles>
+          <Link href="/register">
+            <a>Register</a>
+          </Link>
+          <Link href="/signin">
+            <a>Sign In</a>
+          </Link>
+        </NavStyles>
       </div>
     );
   }
 }
-// export const Bath = () => <div>HI</div>;
 
-// import {Home, Bath} from './index'
-///////////
+const mapStateToProps = state => ({
+  users: state.users
+});
 
-export default Home;
-
-// import Wrapper from './index'
+export default connect(mapStateToProps)(Home);
