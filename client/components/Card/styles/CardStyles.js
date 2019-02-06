@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   position: relative;
@@ -38,18 +38,3 @@ export const CardWrapper = styled.div`
     }
   }
 `;
-
-// export const CardList = styled.ul`
-//   list-style: none;
-//   width: 80%;
-//   margin: 0 auto;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-around;
-
-//   li {
-//     text-align: center;
-//     font-size: 1.5rem;
-//     padding: 0;
-//   }
-// `;

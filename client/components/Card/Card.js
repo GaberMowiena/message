@@ -4,9 +4,11 @@ import { CardWrapper, CardList } from './styles/CardStyles';
 const CardStyled = () => {
   return (
     <CardWrapper>
-      <div class="card__side card__side--front">
-        <h4 class="card__heading">
-          <span class="card__heading-span card__heading-span--1">Heading</span>
+      <div className="card__side card__side--front">
+        <h4 className="card__heading">
+          <span className="card__heading-span card__heading-span--1">
+            Heading
+          </span>
         </h4>
 
         <li>Item 1</li>
@@ -15,9 +17,9 @@ const CardStyled = () => {
         <li>Item 4</li>
         <li>Item 5</li>
       </div>
-      <div class="card__side card__side--back card__side--back-1">
-        <h4 class="card__heading">
-          <span class="card__heading-span card__heading-span--1">
+      <div className="card__side card__side--back card__side--back-1">
+        <h4 className="card__heading">
+          <span className="card__heading-span card__heading-span--1">
             Back Heading
           </span>
         </h4>

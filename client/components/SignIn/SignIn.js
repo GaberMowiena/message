@@ -60,28 +60,30 @@ class SignIn extends Component {
       >
         <FormSectionHeading>sign in</FormSectionHeading>
         <FormFieldSet>
-          <FormLabel htmlFor="email">
-            Email
-            <FormTextInput
-              id="email"
-              name="email"
-              type="email"
-              placeholder="email"
-              onChange={this.handleChange}
-              value={email}
-            />
-          </FormLabel>
-          <FormLabel htmlFor="password">
-            Password
-            <FormTextInput
-              id="password"
-              name="password"
-              type="password"
-              placeholder="password"
-              onChange={this.handleChange}
-              value={password}
-            />
-          </FormLabel>
+          <FormLabel htmlFor="email">Email</FormLabel>
+          <br />
+          <FormTextInput
+            id="email"
+            name="email"
+            type="email"
+            placeholder="email"
+            onChange={this.handleChange}
+            value={email}
+          />
+          <br />
+
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <br />
+          <FormTextInput
+            id="password"
+            name="password"
+            type="password"
+            placeholder="password"
+            onChange={this.handleChange}
+            value={password}
+          />
+          <br />
+          <br />
 
           <button type="submit">Sign In</button>
         </FormFieldSet>

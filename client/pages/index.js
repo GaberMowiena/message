@@ -27,6 +27,13 @@ const TitleWrapper = styled.span`
   border: 0;
 `;
 
+const IndexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const ParticleWrapper = styled.div`
+  height: 200px;
+`;
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -51,13 +58,19 @@ class Home extends Component {
         }
       })
         .then(data => data.json())
-        .then(user => console.log(user));
+        .then(user => {
+          if (user) {
+            Router.push('/profile');
+          }
+        });
     }
   }
   render() {
     return (
-      <div>
-        <Particles params={particlesOptions} />
+      <IndexWrapper>
+        <ParticleWrapper>
+          <Particles params={particlesOptions} />
+        </ParticleWrapper>
         <TitleWrapper>Peer Me</TitleWrapper>
         <NavStyles>
           <Link href="/register">
@@ -67,7 +80,7 @@ class Home extends Component {
             <a>Sign In</a>
           </Link>
         </NavStyles>
-      </div>
+      </IndexWrapper>
     );
   }
 }

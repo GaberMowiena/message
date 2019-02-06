@@ -15,6 +15,11 @@ export const GithubButton = styled(Github)`
   height: 1.6rem;
   width: 1.6rem;
 `;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 class Register extends Component {
   state = {
     email: '',
@@ -54,7 +59,7 @@ class Register extends Component {
   render() {
     const { email, password, name, city, cohort } = this.state;
     return (
-      <div>
+      <div id="form">
         <Form
           onSubmit={e => {
             e.preventDefault();
@@ -63,41 +68,43 @@ class Register extends Component {
         >
           <FormSectionHeading>register</FormSectionHeading>
           <FormFieldSet>
-            <FormLabel htmlFor="name">
-              Name
-              <FormTextInput
-                id="name"
-                name="name"
-                type="name"
-                placeholder="name"
-                onChange={this.handleChange}
-                value={name}
-              />
-            </FormLabel>
-            <FormLabel htmlFor="email">
-              Email
-              <FormTextInput
-                id="email"
-                name="email"
-                type="email"
-                placeholder="email"
-                onChange={this.handleChange}
-                value={email}
-              />
-            </FormLabel>
-            <FormLabel htmlFor="password">
-              Password
-              <FormTextInput
-                id="password"
-                type="password"
-                name="password"
-                placeholder="password"
-                onChange={this.handleChange}
-                value={password}
-              />
-            </FormLabel>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <br />
+            <FormTextInput
+              id="name"
+              name="name"
+              type="name"
+              placeholder="name"
+              onChange={this.handleChange}
+              value={name}
+            />
+            <br />
 
-            <button type="submit">Register</button>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <br />
+            <FormTextInput
+              id="email"
+              name="email"
+              type="email"
+              placeholder="email"
+              onChange={this.handleChange}
+              value={email}
+            />
+            <br />
+
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <br />
+            <FormTextInput
+              id="password"
+              type="password"
+              name="password"
+              placeholder="password"
+              onChange={this.handleChange}
+              value={password}
+            />
+            <br />
+            <br />
+            <button>Register</button>
           </FormFieldSet>
         </Form>
 

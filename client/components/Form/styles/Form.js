@@ -9,17 +9,14 @@ const Form = styled.form`
   line-height: 1.5;
   font-weight: 600;
 
-  label {
-    display: block;
-    margin-bottom: 1rem;
-  }
   input,
   textarea,
   select {
-    width: 100%;
+    text-align: center;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid black;
+
     &:focus {
       outline: 0;
       border-color: purple;
@@ -37,7 +34,6 @@ const Form = styled.form`
   fieldset {
     border: 0;
     padding: 0;
-
     &[disabled] {
       opacity: 0.5;
     }

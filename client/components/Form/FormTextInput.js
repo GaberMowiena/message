@@ -14,6 +14,6 @@ export default class FormTextInput extends PureComponent {
   }
 
   render() {
-    return <input type="text" {...this.props} />;
+    return <input {...this.props} />;
   }
 }
