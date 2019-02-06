@@ -8,6 +8,8 @@ injectGlobal`
   html {
     box-sizing: border-box;
     font-size: 10px;
+    height: 100%;
+    width: 100%;
 
   }
   * *:before, *:after {
@@ -18,6 +20,8 @@ injectGlobal`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
+    height: 100%;
+    width: 100%;
 
   }
   a {

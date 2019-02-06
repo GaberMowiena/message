@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
-import Form from '../styles/Form';
+
+// app imports
+import Form from '../Form/styles/Form';
+import FormSectionHeading from '../Form/FormSectionHeading';
+import FormTextInput from '../Form/FormTextInput';
+import FormLabel from '../Form/FormLabel';
+import FormFieldSet from '../Form/FormFieldSet';
 
 class SignIn extends Component {
   state = {
@@ -10,6 +16,13 @@ class SignIn extends Component {
   saveToken = token => {
     window.sessionStorage.setItem('token', token);
   };
+  sanitizeEmail(email) {
+    return email && email.replace(/\s+/g, '').toLowerCase();
+  }
+
+  sanitizeUsername(username) {
+    return username && username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  }
   handleChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
@@ -18,12 +31,13 @@ class SignIn extends Component {
     });
   };
   handleSignInSubmit = () => {
-    fetch('http://localhost:3000/signin', {
+    const { email, password } = this.state;
+    fetch('http://localhost:3000/users/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
+        email: this.sanitizeEmail(email),
+        password
       })
     })
       .then(response => response.json())
@@ -44,28 +58,33 @@ class SignIn extends Component {
           this.handleSignInSubmit();
         }}
       >
-        <fieldset>
-          <label>
-            <input
+        <FormSectionHeading>sign in</FormSectionHeading>
+        <FormFieldSet>
+          <FormLabel htmlFor="email">
+            Email
+            <FormTextInput
+              id="email"
               name="email"
               type="email"
               placeholder="email"
-              value={email}
               onChange={this.handleChange}
+              value={email}
             />
-          </label>
-          <label>
-            <input
+          </FormLabel>
+          <FormLabel htmlFor="password">
+            Password
+            <FormTextInput
+              id="password"
               name="password"
               type="password"
               placeholder="password"
-              value={password}
               onChange={this.handleChange}
+              value={password}
             />
-          </label>
+          </FormLabel>
 
           <button type="submit">Sign In</button>
-        </fieldset>
+        </FormFieldSet>
       </Form>
     );
   }

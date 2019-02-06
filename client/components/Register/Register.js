@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { Github } from 'styled-icons/boxicons-logos/Github';
+import Link from 'next/link';
 
-import Form from '../styles/Form';
-// import { GithubButton } from '../Button/Github';
+// app imports
+import Form from '../Form/styles/Form';
+import FormSectionHeading from '../Form/FormSectionHeading';
+import FormTextInput from '../Form/FormTextInput';
+import FormLabel from '../Form/FormLabel';
+import FormFieldSet from '../Form/FormFieldSet';
 
 export const GithubButton = styled(Github)`
   height: 1.6rem;
@@ -46,9 +51,6 @@ class Register extends Component {
         }
       });
   };
-  handleRegisterGithub = () => {
-    fetch('http://localhost:3000/auth/github');
-  };
   render() {
     const { email, password, name, city, cohort } = this.state;
     return (
@@ -59,58 +61,50 @@ class Register extends Component {
             this.handleRegisterSubmit();
           }}
         >
-          <fieldset>
-            <label>
-              <input
+          <FormSectionHeading>register</FormSectionHeading>
+          <FormFieldSet>
+            <FormLabel htmlFor="name">
+              Name
+              <FormTextInput
+                id="name"
                 name="name"
                 type="name"
                 placeholder="name"
-                value={name}
                 onChange={this.handleChange}
+                value={name}
               />
-            </label>
-            <label>
-              <input
+            </FormLabel>
+            <FormLabel htmlFor="email">
+              Email
+              <FormTextInput
+                id="email"
                 name="email"
                 type="email"
                 placeholder="email"
+                onChange={this.handleChange}
                 value={email}
-                onChange={this.handleChange}
               />
-            </label>
-            <label>
-              <input
-                name="password"
+            </FormLabel>
+            <FormLabel htmlFor="password">
+              Password
+              <FormTextInput
+                id="password"
                 type="password"
+                name="password"
                 placeholder="password"
+                onChange={this.handleChange}
                 value={password}
-                onChange={this.handleChange}
               />
-            </label>
-            <label>
-              <input
-                name="city"
-                text="text"
-                placeholder="city"
-                value={city}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              <input
-                name="cohort"
-                type="text"
-                placeholder="cohort"
-                value={cohort}
-                onChange={this.handleChange}
-              />
-            </label>
+            </FormLabel>
+
             <button type="submit">Register</button>
-          </fieldset>
+          </FormFieldSet>
         </Form>
-        <button onClick={this.handleRegisterGithub}>
-          <GithubButton />
-        </button>
+
+        <GithubButton />
+        <Link href="https://github.com/login/oauth/authorize?client_id=e0ce55a5891b2f5d27d0">
+          <a>Register with Github</a>
+        </Link>
       </div>
     );
   }

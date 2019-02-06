@@ -9,10 +9,11 @@ export const PageWrapper = styled.div`
   justify-content: center;
   text-align: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 `;
 
 export const Inner = styled.div`
-  max-width: 1000px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
 `;

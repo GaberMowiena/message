@@ -43,7 +43,7 @@ class Home extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:3000/signin', {
+      fetch('http://localhost:3000/users/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,14 +53,6 @@ class Home extends Component {
         .then(data => data.json())
         .then(user => console.log(user));
     }
-    // const users = await fetch('http://localhost:3000').then(data =>
-    //   data.json()
-    // );
-    // const calendarData = await fetch(
-    //   'http://slack-server.elasticbeanstalk.com/calendar/NY/9'
-    // ).then(calendars => calendars.json());
-
-    // this.setState({ users, calendarData });
   }
   render() {
     return (

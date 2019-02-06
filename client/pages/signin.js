@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import SignIn from '../components/SignIn/SignIn';
 import Nav from '../components/Nav/Nav';
 

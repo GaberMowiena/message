@@ -1,5 +1,6 @@
 const createUser = async (profile, db) => {
   try {
+    console.log('profile', profile);
     const { name, email, id, location } = profile;
 
     db.transaction(trx => {

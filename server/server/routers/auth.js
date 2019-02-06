@@ -2,8 +2,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const knex = require('knex');
-const passport = require('passport');
-const GitHubStrategy = require('passport-github2').Strategy;
+
+const axios = require('axios');
 require('dotenv').config();
 
 // app imports
@@ -23,54 +23,21 @@ const db = knex(opt);
 // global constants
 const router = new express.Router();
 
-// app.get(
-// //   '/auth/github',
-// passportGithub.authenticate('github', { scope: ['user:email'] }),
-//   function(req, res) {
-//     // The request will be redirected to GitHub for authentication, so this
-//     // function will not be called.
-//     res.send('hi');
-//   };
-// // );
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
+router.route('/github/callback').get((req, res) => {
+  const uri = `https://github.com/login/oauth/access_token?client_id=${
+    process.env.CLIENT_ID
+  }&client_secret=${process.env.CLIENT_SECRET}&code=${req.query.code}`;
+  axios
+    .post(uri, {}, { headers: { Accept: 'application/json' } })
+    .then(response => {
+      const token = response.data['access_token'];
+      axios
+        .get(`https://api.github.com/user?access_token=${token}`)
+        .then(info => github.createUser(info.data, db))
+        .then(data => data);
+      // sessionController.startSession(req, res);
+    })
+    .catch(err => console.log('err', err));
 });
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-passport.use(
-  new GitHubStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: 'http://127.0.0.1:3000/auth/github/callback'
-    },
-    (accessToken, refreshToken, profile, done) => {
-      github.createUser(profile._json, db);
-      return done(null, profile);
-    }
-  )
-);
-
-router
-  .route('/github')
-  .get(
-    passport.authenticate('github', { scope: ['user:email'] }),
-    (req, res) => {
-      res.send('hi');
-    }
-  );
-
-router
-  .route('/github/callback')
-  .get(
-    passport.authenticate('github', { failureRedirect: '/login' }),
-    (req, res) => {
-      res.redirect('localhost:3000/users/all');
-    }
-  );
 
 module.exports = router;
