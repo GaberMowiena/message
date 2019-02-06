@@ -9,7 +9,7 @@
 This app's primary objective will be to match event attendees with each other before attending workshop.
 Besides that, webpage will be an all-in-one for updates on Codesmith related events and outreach.
 
-Benefits
+### Benefits
 
 Attendees:
 
@@ -26,7 +26,7 @@ Cohort:
 - Produce a project that could gain hundreds of users
 - Exposure to collaborative environment and production level technologies
 
-## Tech Stack
+### Tech Stack
 
 ---
 

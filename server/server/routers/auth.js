@@ -35,7 +35,6 @@ router.route('/github/callback').get((req, res) => {
         .get(`https://api.github.com/user?access_token=${token}`)
         .then(info => github.createUser(info.data, db))
         .then(data => data);
-      // sessionController.startSession(req, res);
     })
     .catch(err => console.log('err', err));
 });
