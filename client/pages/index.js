@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getUsers } from '../store/actions/usersActions';
+import Router from 'next/router';
 
+import { getUsers } from '../store/actions/usersActions';
 import NavStyles from '../components/Nav/styles/NavStyles';
 
 const particlesOptions = {

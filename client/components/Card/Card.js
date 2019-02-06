@@ -1,34 +1,39 @@
 import React, { PureComponent, Fragment } from 'react';
-import { CardWrapper, CardList } from './styles/CardStyles';
+import { CardWrapper } from './styles/CardStyles';
 
-const CardStyled = () => {
+const CardStyled = ({
+  text,
+  text1,
+  text2,
+  text3,
+  backtext,
+  backtext1,
+  backtext2,
+  backtext3
+}) => {
   return (
     <CardWrapper>
       <div className="card__side card__side--front">
         <h4 className="card__heading">
           <span className="card__heading-span card__heading-span--1">
-            Heading
+            {text}
           </span>
         </h4>
 
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
+        <li>{text1}</li>
+        <li>{text2}</li>
+        <li>{text3}</li>
       </div>
       <div className="card__side card__side--back card__side--back-1">
         <h4 className="card__heading">
           <span className="card__heading-span card__heading-span--1">
-            Back Heading
+            {backtext}
           </span>
         </h4>
 
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
+        <li>{backtext1}</li>
+        <li>{backtext2}</li>
+        <li>{backtext3}</li>
       </div>
     </CardWrapper>
   );
@@ -36,8 +41,8 @@ const CardStyled = () => {
 
 class Card extends PureComponent {
   render() {
-    // const { children, ...props } = this.props;
-    return <CardStyled />;
+    const { children, ...props } = this.props;
+    return <CardStyled {...props} />;
   }
 }
 

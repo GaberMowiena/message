@@ -1,3 +1,4 @@
+import axios from 'axios';
 const handleProfileGet = (req, res, db) => {
   const { id } = req.params;
   db.select('*')
@@ -13,4 +14,9 @@ const handleProfileGet = (req, res, db) => {
     .catch(err => res.status(400).json('Error getting profile'));
 };
 
-module.exports = { handleProfileGet };
+const handleMeetupGet = (req, res) => {
+  axios
+    .get(`https://api.meetup.com/Build-with-Code-New-York/events/258368054`)
+    .then(data => res.json(data));
+};
+module.exports = { handleProfileGet, handleMeetupGet };
