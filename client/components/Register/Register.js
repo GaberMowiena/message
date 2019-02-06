@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
+import styled from 'styled-components';
+import { Github } from 'styled-icons/boxicons-logos/Github';
 
 import Form from '../styles/Form';
+// import { GithubButton } from '../Button/Github';
 
+export const GithubButton = styled(Github)`
+  height: 1.6rem;
+  width: 1.6rem;
+`;
 class Register extends Component {
   state = {
     email: '',
@@ -19,7 +26,7 @@ class Register extends Component {
     });
   };
   handleRegisterSubmit = () => {
-    fetch('http://localhost:3000/register', {
+    fetch('http://localhost:3000/users/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -38,6 +45,9 @@ class Register extends Component {
           console.log(data);
         }
       });
+  };
+  handleRegisterGithub = () => {
+    fetch('http://localhost:3000/auth/github');
   };
   render() {
     const { email, password, name, city, cohort } = this.state;
@@ -98,6 +108,9 @@ class Register extends Component {
             <button type="submit">Register</button>
           </fieldset>
         </Form>
+        <button onClick={this.handleRegisterGithub}>
+          <GithubButton />
+        </button>
       </div>
     );
   }

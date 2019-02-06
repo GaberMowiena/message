@@ -21,6 +21,14 @@ const db = knex(opt);
 // global constants
 const router = new express.Router();
 
+router.route('/all').get((req, res) => {
+  db.select('*')
+    .from('users')
+    .then(users => {
+      res.json(users);
+    });
+});
+
 router.route('/register').post((req, res) => {
   user.createUser(req, res, db, bcrypt);
 });

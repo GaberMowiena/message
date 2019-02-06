@@ -2,9 +2,12 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const knex = require('knex');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
+require('dotenv').config();
 
 // app imports
-const { passportGithub } = require('../auth/passport');
+const github = require('../handlers/auth');
 
 const opt = {
   client: 'pg',
@@ -21,19 +24,41 @@ const db = knex(opt);
 const router = new express.Router();
 
 // app.get(
-//   '/auth/github',
-passportGithub.authenticate('github', { scope: ['user:email'] }),
-  function(req, res) {
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
-    res.send('hi');
-  };
-// );
+// //   '/auth/github',
+// passportGithub.authenticate('github', { scope: ['user:email'] }),
+//   function(req, res) {
+//     // The request will be redirected to GitHub for authentication, so this
+//     // function will not be called.
+//     res.send('hi');
+//   };
+// // );
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: 'http://127.0.0.1:3000/auth/github/callback'
+    },
+    (accessToken, refreshToken, profile, done) => {
+      github.createUser(profile._json, db);
+      return done(null, profile);
+    }
+  )
+);
 
 router
   .route('/github')
   .get(
-    passportGithub.authenticate('github', { scope: ['user:email'] }),
+    passport.authenticate('github', { scope: ['user:email'] }),
     (req, res) => {
       res.send('hi');
     }
@@ -42,9 +67,9 @@ router
 router
   .route('/github/callback')
   .get(
-    passportGithub.authenticate('github', { failureRedirect: '/login' }),
+    passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
-      res.redirect('/');
+      res.redirect('localhost:3000/users/all');
     }
   );
 

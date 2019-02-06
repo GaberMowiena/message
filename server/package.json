@@ -7,6 +7,11 @@
     "start": "nodemon server/server.js",
     "test": "jest"
   },
+  "proxy": {
+    "/auth/github": {
+      "target": "http://localhost:3000"
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
