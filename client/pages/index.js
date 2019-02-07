@@ -58,7 +58,14 @@ class Home extends Component {
           Authorization: token
         }
       })
-        .then(data => data.json())
+        .then(data => {
+          console.log(data);
+          if (data.status === 200) {
+            return data.json();
+          } else {
+            return;
+          }
+        })
         .then(user => {
           if (user) {
             Router.push('/profile');

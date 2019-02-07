@@ -1,7 +1,7 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { CardWrapper, CardImage } from './styles/CardStyles';
 
-const CardStyled = ({
+const ImageCardStyled = ({
   text,
   text1,
   text2,
@@ -20,6 +20,7 @@ const CardStyled = ({
             {text}
           </span>
         </h4>
+        <CardImage src={img} alt="profile" />
 
         <li>{text1}</li>
         <li>{text2}</li>
@@ -40,11 +41,11 @@ const CardStyled = ({
   );
 };
 
-class Card extends PureComponent {
+class ImageCard extends PureComponent {
   render() {
     const { children, ...props } = this.props;
-    return <CardStyled {...props} />;
+    return <ImageCardStyled {...props} />;
   }
 }
 
-export default Card;
+export default ImageCard;

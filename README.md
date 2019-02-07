@@ -11,6 +11,8 @@ Besides that, webpage will be an all-in-one for updates on Codesmith related eve
 
 ### Benefits
 
+---
+
 Attendees:
 
 - Streamline pair-programming process and allow users to develop pair-programming relationships

@@ -57,7 +57,6 @@ class Profile extends Component {
           text1="Number of JSHP visits: 15"
           backtext="Interview scheduled: Feb 29, 2019"
         />
-        {/*<Card text="yea" />*/}
       </ProfileStyle>
     );
   }

@@ -38,3 +38,8 @@ export const CardWrapper = styled.div`
     }
   }
 `;
+
+export const CardImage = styled.img`
+  height: 250px;
+  width: 250px;
+`;
