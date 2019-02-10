@@ -1,40 +1,42 @@
-import React, { Component } from 'react';
-import Router from 'next/router';
+import React, { Component } from "react";
+import Router from "next/router";
 
 // app imports
-import Form from '../Form/styles/Form';
-import FormSectionHeading from '../Form/FormSectionHeading';
-import FormTextInput from '../Form/FormTextInput';
-import FormLabel from '../Form/FormLabel';
-import FormFieldSet from '../Form/FormFieldSet';
+import Form from "../Form/styles/Form";
+import FormSectionHeading from "../Form/FormSectionHeading";
+import FormTextInput from "../Form/FormTextInput";
+import FormLabel from "../Form/FormLabel";
+import FormFieldSet from "../Form/FormFieldSet";
+
+// import { FormLegend, FormInput, FormLabelWrapper } from '../Form/styles/Form2';
 
 class SignIn extends Component {
   state = {
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   };
   saveToken = token => {
-    window.sessionStorage.setItem('token', token);
+    window.sessionStorage.setItem("token", token);
   };
   sanitizeEmail(email) {
-    return email && email.replace(/\s+/g, '').toLowerCase();
+    return email && email.replace(/\s+/g, "").toLowerCase();
   }
 
   sanitizeUsername(username) {
-    return username && username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    return username && username.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
   }
   handleChange = e => {
     const { name, type, value } = e.target;
-    const val = type === 'number' ? parseFloat(value) : value;
+    const val = type === "number" ? parseFloat(value) : value;
     this.setState({
       [name]: val
     });
   };
   handleSignInSubmit = () => {
     const { email, password } = this.state;
-    fetch('http://localhost:3000/users/signin', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("http://localhost:3000/users/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: this.sanitizeEmail(email),
         password
@@ -44,7 +46,7 @@ class SignIn extends Component {
       .then(data => {
         if (data && data.success) {
           this.saveToken(data.token);
-          Router.push('/');
+          Router.push("/");
         }
       })
       .catch(err => console.log(err));
@@ -61,6 +63,7 @@ class SignIn extends Component {
         <FormSectionHeading>sign in</FormSectionHeading>
         <FormFieldSet>
           <FormLabel htmlFor="email">Email</FormLabel>
+
           <br />
           <FormTextInput
             id="email"

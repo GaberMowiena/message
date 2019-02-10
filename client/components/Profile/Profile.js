@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Card from '../Card/Card';
+import React, { Component } from "react";
+import styled from "styled-components";
+import Card from "../Card/Card";
 
 const ProfileStyle = styled.div`
   display: grid;
@@ -33,32 +33,7 @@ class Profile extends Component {
   }
   render() {
     const { name, location, status, rsvp } = this.state;
-    return (
-      <ProfileStyle>
-        <Card
-          text={`Event name: ${name}`}
-          text1={`Location: ${location}`}
-          text2={`Status: ${status}`}
-          text3={`YES rsvp: ${rsvp}`}
-          backtext="Click to RSVP"
-        />
-        <Card
-          text="Problem of the day"
-          text1="Find the max number of ways to make 5 given an array of [1,2,5]"
-          backtext="Link to problem statement"
-          backtext1="https://leetcode.com/problems/coin-change-2/description/"
-        />
-        <Card
-          text="Philip's coding meme of the week"
-          backtext="None available"
-        />
-        <Card
-          text="View Codesmith Application"
-          text1="Number of JSHP visits: 15"
-          backtext="Interview scheduled: Feb 29, 2019"
-        />
-      </ProfileStyle>
-    );
+    return <section>HI THERE</section>;
   }
 }
 
